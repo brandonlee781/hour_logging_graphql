@@ -1,21 +1,14 @@
 import { makeExecutableSchema } from 'graphql-tools';
 import { resolvers } from './resolvers';
+import { Log, Project } from './types';
 
-const typeDefs = `
-  type Log {
-    id: ID!
-    startTime: String
-    endTime: String
-    date: String
-    duration: Int
-    project: String
-    notes: String
-  }
-
+const RootQuery = `
   type Query {
     allLogs: [Log!]!
+    allProjects: [Project!]!
   }
-
+`;
+const Mutations = `
   type Mutation {
     createLog(
       startTime: String, 
@@ -28,4 +21,12 @@ const typeDefs = `
   }
 `;
 
-export const schema = makeExecutableSchema({ typeDefs, resolvers });
+export const schema = makeExecutableSchema({ 
+  resolvers, 
+  typeDefs: [
+    Log,
+    Project,
+    RootQuery,
+    Mutations
+  ], 
+});

@@ -1,5 +1,12 @@
 {
-  "watch": ["src"],
+  "delay": 0,
   "ext": "ts",
-  "exec": "ts-node ./src/index.ts"
+  "exec": "ts-node --project ./tsconfig.json ./src/index.ts",
+  "execMap": {
+    "ts": "./node_modules/.bin/ts-node"
+  },
+  "events": {
+    "start": "./node_modules/.bin/tslint -c ./tslint.json 'src/**/*.ts' --format stylish --force",
+    "restart": "osascript -e 'display notification \"restart server\" with title \"node.js application\"'"
+  }
 }

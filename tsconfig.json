@@ -1,9 +1,9 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "target": "es2017",
-    "lib": ["es6", "dom"],
     "module": "commonjs",
+    "target": "es2017",
+    "moduleResolution": "node",
     "experimentalDecorators": true,
     "allowJs": true,
     "watch": true,
@@ -12,7 +12,9 @@
   },
   "include": [
     "src/**/*.ts",
-    "test/**/*.ts"
+    "test/**/*.ts",
+    "typings/**/*.d.ts",
+    "typings_custom/**/*.d.ts"
   ],
   "exclude": [
     "node_modules"

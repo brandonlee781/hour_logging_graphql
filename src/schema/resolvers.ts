@@ -1,14 +1,19 @@
-import { allLogs } from './queries';
+import { Context } from '../context/Context';
+import { allLogs, allProjects } from './queries';
 import { createLog } from './mutations';
 
 export const resolvers = {
   Query: {
-    allLogs
+    allLogs,
+    allProjects
   },
   Mutation: {
     createLog
   },
   Log: {
-    id: root => root._id || root.id,
+    project: async ({ projectId }, data, context: Context<common.PageinationArguments>) => {
+      const project = await context.Services.ProjectService.findById(projectId);
+      return project.toDatabaseObject();
+    }
   }
 };

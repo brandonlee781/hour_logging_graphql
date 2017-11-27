@@ -1,26 +1,40 @@
-import * as express from 'express';
-import * as bodyParser from 'body-parser';
-import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
-import { schema } from './schema';
-import { connectMongo } from './mongo-connection';
+import {
+  Environment,
+  Server,
+  winstonStream,
+  debugStream
+} from './core';
 
-const PORT = 3000;
+// Import express libraries
+import * as helmet from 'helmet';
+import * as morgan from 'morgan';
+import * as cors from 'cors';
 
-const start = async () => {
-  const mongo = await connectMongo();
-  const app = express();
+// Import customer middleware
 
-  app.use('/graphql', bodyParser.json(), graphqlExpress({ 
-    schema,
-    context: { mongo },
-  }));
-  app.get('/graphiql', graphiqlExpress({ 
-    endpointURL: '/graphql' 
-  }));
+// Import routes
+import { DefaultRoutes, GraphQLRoute } from './routes';
 
-  app.listen(PORT, () => {
-    console.log(`GraphQL server started on port ${PORT}`);
-  });
-};
+// Create the express app
+const app = Server.init();
 
-start();
+// Helmet config
+app.use(helmet());
+app.use(helmet.noCache());
+app.use(helmet.hsts({
+  maxAge: 31536000,
+  includeSubdomains: true,
+}));
+
+// Enable cors
+app.use(cors());
+
+// Add winston logging
+app.use(morgan('dev', debugStream));
+app.use(morgan('combined', winstonStream));
+
+// Map routes to the application
+DefaultRoutes.map(app);
+GraphQLRoute.map(app);
+
+Server.run(app, Environment.getConfig().server.port);
