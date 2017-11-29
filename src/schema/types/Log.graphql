@@ -1,0 +1,21 @@
+# A single log entry detailing a period of time spent working on a specific project and any notes describing what was done
+type Log {
+  # UUID of log entry
+  id: ID!
+  # Time string in 24 hour time log entry began
+  startTime: String
+  # Time string in 24 hour time log entry ended
+  endTime: String
+  # Date of log entry
+  date: String
+  # Number of hours between startTime and endTime
+  duration: Int
+  # Project log entry is associated with
+  project: Project
+  # Any notes associated with log entry
+  note: String
+  # Timestamp log entry was added to database
+  createdAt: String
+  # Timestamp log entry was last modified in database
+  updatedAt: String
+}

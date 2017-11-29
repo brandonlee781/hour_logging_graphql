@@ -1,0 +1,6 @@
+extend type Query {
+  # Get all Projects in the database
+  allProjects: [Project!]!
+  # Get a single Project from the database by its UUID
+  oneProject(id: String!): Project!
+}
