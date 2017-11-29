@@ -38,7 +38,7 @@ export = <config.Environments> {
    */
   test: {
     database: {
-      connection: 'mysql:://root:root@localhost:3306/hour_logger_test',
+      connection: `mysql://root:${process.env.MYSQL_PASS}@localhost:3306/hour_logger_test`,
       client: 'mysql',
       migrations: {
         directory: './src/databse/migrations',
@@ -50,7 +50,7 @@ export = <config.Environments> {
     },
     server: {
       host: 'localhost',
-      port: process.env.PORT || '3000',
+      port: '8080' || process.env.PORT,
       graphiql: false,
     },
     logger: {
