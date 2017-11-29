@@ -21,7 +21,7 @@ export class LogActions extends AbstractActions<Knex> {
       .select('logs.*', 'projects.id as project_id', 'projects.name as project_name')
       .from(Tables.Logs)
       .join('projects', { project_id: 'projects.id' })
-      .where('id', id);
+      .where('logs.id', id);
     return Utils.single(results);
   }
 
@@ -30,7 +30,15 @@ export class LogActions extends AbstractActions<Knex> {
       .select('logs.*', 'projects.id as project_id', 'projects.name as project_name')
       .from(Tables.Logs)
       .join('projects', { project_id: 'projects.id' })
-      .whereIn('id', ids);
+      .whereIn('logs.id', ids);
+  }
+
+  public async findByProjectId(id: string): Promise<models.log.RawAttributes[]> {
+    return this.db
+      .select('logs.*', 'projects.id as project_id', 'projects.name as project_name')
+      .from(Tables.Logs)
+      .join('projects', { project_id: 'projects.id' })
+      .where('projects.id', id);
   }
 
   public async search(text: string): Promise<models.log.RawAttributes[]> {
@@ -43,10 +51,10 @@ export class LogActions extends AbstractActions<Knex> {
   }
 
   public async create(project: models.log.RawAttributes): Promise<string> {
-    const ids = await this.db
+    return this.db
       .insert(project)
+      .returning('id')
       .into(Tables.Logs);
-    return Utils.single<string>(ids);
   }
 
   public async update(project: models.log.RawAttributes): Promise<void> {
@@ -57,8 +65,8 @@ export class LogActions extends AbstractActions<Knex> {
   }
 
   public async delete(id: string): Promise<void> {
-    await this.db
-      .delete()
+    return await this.db
+      .del()
       .from(Tables.Logs)
       .where('id', id);
   }

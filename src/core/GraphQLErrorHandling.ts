@@ -2,11 +2,7 @@ import * as uuid from 'uuid';
 import {
   GraphQLType,
   GraphQLSchema,
-  TypeMap,
   GraphQLObjectType,
-  GraphQLFieldDefinitionMap,
-  GraphQLFieldDefinition,
-  GraphQLFieldResolveFn,
 } from 'graphql';
 
 import { Environment } from './';
@@ -22,7 +18,7 @@ export class GraphQLErrorHandling {
   }
 
   private static maskSchema(schema: GraphQLSchema): void {
-    const types: TypeMap = schema.getTypeMap();
+    const types = schema.getTypeMap();
     for (const typeName in types) {
       if (!Object.hasOwnProperty.call(types, typeName)) {
         continue;
@@ -37,7 +33,7 @@ export class GraphQLErrorHandling {
       return;
     }
 
-    const fields: GraphQLFieldDefinitionMap = objectType.getFields();
+    const fields = objectType.getFields();
     for (const fieldName in fields) {
       if (!Object.hasOwnProperty.call(fields, fieldName)) {
         continue;
@@ -46,8 +42,9 @@ export class GraphQLErrorHandling {
     }
   }
 
-  private static maskField(field: GraphQLFieldDefinition): void {
-    const resolveFn: GraphQLFieldResolveFn = field.resolve;
+  // tslint:disable-next-line:no-any
+  private static maskField(field: any): void {
+    const resolveFn = field.resolve;
     if (field[Processed] || !resolveFn) {
       return;
     }

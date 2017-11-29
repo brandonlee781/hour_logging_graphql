@@ -1,6 +1,6 @@
 import * as express from 'express';
 
-export class DefaultRoutes {
+export class DefaultRoute {
 
   static map(app: express.Application): void {
     app.get('/', (req: express.Request, res: express.Response) => {

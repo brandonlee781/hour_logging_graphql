@@ -30,6 +30,12 @@ export class LogService {
     return results.map(result => new LogModel(result));
   }
 
+  public async findByProjectId(id: string): Promise<LogModel[]> {
+    this.log.debug('findByProjectId called with id=', id);
+    const results = await this.logActions.findByProjectId(id);
+    return results.map(result => new LogModel(result));
+  }
+
   public async search(text: string): Promise<LogModel[]> {
     this.log.debug('search called with text=', text);
     const results = await this.logActions.search(text);
@@ -38,20 +44,20 @@ export class LogService {
 
   public async create(logModel: LogModel): Promise<LogModel> {
     this.log.debug('created called with =', LogModel);
-    const id = await this.logActions.create(logModel.toDatabaseObject());
-    return this.findById(id);
+    await this.logActions.create(logModel.toDatabaseObject());
+    return this.findById(logModel.Id);
   }
 
-  public async update(newLogModel: LogModel): Promise<LogModel> {
+  public async update(logId: string, newLogModel: LogModel): Promise<LogModel> {
     this.log.debug('updated called with = ', newLogModel);
-    const logModel = await this.findById(newLogModel.Id);
+    const logModel = await this.findById(logId);
     logModel.merge(newLogModel);
     await this.logActions.update(logModel.toDatabaseObject());
-    return this.findById(newLogModel.Id);
+    return this.findById(logId);
   }
 
   public async delete(id: string): Promise<void> {
     this.log.debug('delete called with id=', id);
-    return this.logActions.delete(id);
+    return await this.logActions.delete(id);
   }
 }

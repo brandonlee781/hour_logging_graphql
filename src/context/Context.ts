@@ -4,6 +4,7 @@ import { ServicesContext } from './ServicesContext';
 
 export class Context<A> {
 
+  public user: {} = {};
   /**
    * We use this property to store the resolve arguments
    * from the root query or mutation, so that we can access
