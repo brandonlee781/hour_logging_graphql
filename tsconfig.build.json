@@ -2,12 +2,13 @@
   "compileOnSave": true,
   "compilerOptions": {
     "target": "es6",
-    "lib": ["es6", "dom"],
+    "lib": ["es6", "dom", "esnext.asynciterable"],
     "module": "commonjs",
     "experimentalDecorators": true,
     "allowJs": true,
     "outDir": "dist",
-    "sourceMap": true
+    "sourceMap": true,
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "src/**/*.ts",
