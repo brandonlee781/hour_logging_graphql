@@ -92,7 +92,7 @@ export class ProjectModel implements AbstractModel<models.project.Attributes, mo
 
 export class Project implements models.project.Attributes {
   public id?: string;
-  public name: string;
+  public name?: string;
   public createdAt?: Date;
   public updatedAt?: Date;
 
