@@ -6,3 +6,4 @@
 /dist/
 /ecosystem.config.js
 .DS_Store
+/coverage/
