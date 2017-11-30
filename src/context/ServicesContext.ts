@@ -1,6 +1,7 @@
 import {
   ProjectService,
-  LogService
+  LogService,
+  InvoiceService
 } from '../services';
 
 import { Logger } from '../core/Logger';
@@ -12,6 +13,7 @@ export class ServicesContext {
 
   private projectService: ProjectService;
   private logService: LogService;
+  private invoiceService: InvoiceService;
 
   static getInstance(): ServicesContext {
     if (!ServicesContext.instance) {
@@ -26,6 +28,9 @@ export class ServicesContext {
   public get LogService(): LogService {
     return this.logService;
   }
+  public get InvoiceService(): InvoiceService {
+    return this.invoiceService;
+  }
 
   public setProjectService(projectService: ProjectService): ServicesContext {
     this.projectService = projectService;
@@ -35,6 +40,11 @@ export class ServicesContext {
   public setLogService(logService: LogService): ServicesContext {
     this.logService = logService;
     log.debug('setLogService');
+    return this;
+  }
+  public setInvoiceService(invoiceService: InvoiceService): ServicesContext {
+    this.invoiceService = invoiceService;
+    log.debug('setInvoiceService');
     return this;
   }
 

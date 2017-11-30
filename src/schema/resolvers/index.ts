@@ -6,8 +6,16 @@ import {
   oneProject,
   allLogsByProjectName,
   allLogsByProjectId,
+  allInvoices,
+  oneInvoice,
 } from './query';
-import { createLog, updateLog, deleteLog } from './mutation';
+import { 
+  createLog, 
+  updateLog, 
+  deleteLog,
+  createProject,
+  createInvoice,
+} from './mutation';
 
 export const resolvers = {
   Query: {
@@ -18,11 +26,16 @@ export const resolvers = {
 
     allProjects,
     oneProject,
+
+    allInvoices,
+    oneInvoice,
   },
   Mutation: {
     createLog,
     updateLog,
-    deleteLog
+    deleteLog,
+    createProject,
+    createInvoice,
   },
   Log: {
     project: async ({ projectId }, data, context: Context<common.PageinationArguments>) => {

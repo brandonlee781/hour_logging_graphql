@@ -1,0 +1,8 @@
+type Invoice {
+  id: ID!
+  number: Int
+  hours: Int
+  rate: Int
+  date: String
+  logs: [Log!]
+}
