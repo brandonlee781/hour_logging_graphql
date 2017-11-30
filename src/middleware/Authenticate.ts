@@ -23,7 +23,6 @@ export class Authenticate {
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     };
     return new Strategy(params, async (payload, done) => {
-      console.log(payload);
       if (payload) {
         return done(null, { email: payload.email });
       }

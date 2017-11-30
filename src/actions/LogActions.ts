@@ -26,6 +26,12 @@ export class LogActions extends AbstractActions<Knex> {
   }
 
   public async findByIds(ids: string[]): Promise<models.log.RawAttributes[]> {
+    const queryStr = this.db
+        .select('logs.*', 'projects.id as project_id', 'projects.name as project_name')
+        .from(Tables.Logs)
+        .join('projects', { project_id: 'projects.id' })
+        .whereIn('logs.id', ids)
+        .toString();
     return this.db
       .select('logs.*', 'projects.id as project_id', 'projects.name as project_name')
       .from(Tables.Logs)

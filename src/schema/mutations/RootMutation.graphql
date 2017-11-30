@@ -1,48 +1,29 @@
 type Mutation {
-  createLog(input: CreateLogInput!): CreateLogPayload
-  updateLog(input: UpdateLogInput!): UpdateLogPayload
-  deleteLog(input: DeleteLogInput!): DeleteLogPayload
+  createProject(input: CreateProjectInput!): CreateProjectPayload
+  createInvoice(input: CreateInvoiceInput!): CreateInvoicePayload
 }
 
-input NewLog {
-  startTime: String, 
-  endTime: String, 
-  date: String, 
-  duration: Int, 
-  projectId: String, 
-  note: String
+input NewProject {
+  name: String!
+}
+input CreateProjectInput {
+  project: NewProject!
 }
 
-input CreateLogInput {
-  log: NewLog
+type CreateProjectPayload {
+  project: Project
 }
 
-type CreateLogPayload {
-  log: Log
+input NewInvoice {
+  number: Int!
+  date: String!
+  hours: Int!
+  rate: Int!
+  logs: [ID!]!
 }
-
-input LogPatch {
-  startTime: String
-  endTime: String
-  date: String
-  duration: Int
-  projectId: String
-  note: String
+input CreateInvoiceInput {
+  invoice: NewInvoice!
 }
-
-input UpdateLogInput {
-  id: ID!
-  patch: LogPatch
-}
-
-type UpdateLogPayload {
-  log: Log
-}
-
-input DeleteLogInput {
-  id: ID!
-}
-
-type DeleteLogPayload {
-  numberOfDeleted: Int
+type CreateInvoicePayload {
+  invoice: Invoice!
 }

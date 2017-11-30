@@ -1,6 +1,17 @@
 extend type Query {
   # Get all Projects in the database
-  allProjects: [Project!]!
+  allProjects: AllProjectsPayload
   # Get a single Project from the database by its UUID
-  oneProject(id: String!): Project!
+  oneProject(input: OneProjectInput!): OneProjectPayload
+}
+
+type AllProjectsPayload {
+  projects: [Project!]!
+}
+
+input OneProjectInput {
+  id: String!
+}
+type OneProjectPayload {
+  project: Project!
 }
