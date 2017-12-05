@@ -20,13 +20,13 @@ export class LoginRoute {
       const token = await sign(
         { email: dbPass[0].email, id: dbPass[0].id }, 
         jwtSecret, 
-        { expiresIn: '2 weeks' }
+        { expiresIn: '14d' }
       );
 
       if (comp) {
         res.json({ token });
       } else {
-        res.json({ error: 'username and password do not match' });
+        res.status(401).json({ error: 'username and password do not match' });
       }
 
     });

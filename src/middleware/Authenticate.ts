@@ -26,7 +26,7 @@ export class Authenticate {
       if (payload) {
         return done(null, { email: payload.email });
       }
-      return done('You are not authorized.', false);
+      return done(null, false);
     });
   }
 
