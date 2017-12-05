@@ -1,12 +1,18 @@
 extend type Query {
   # Get all Logs in the database
-  allLogs: AllLogsPayload!
+  allLogs(options: QueryOptions): AllLogsPayload!
   # Get a single Log from the database by its UUID
   oneLog(input: OneLogInput!): OneLogPayload!
   # Get all Logs associated with a specific Project by the project's name
-  allLogsByProjectName(input: AllLogsByProjectNameInput!): AllLogsByProjectNamePayload!
+  allLogsByProjectName(
+    input: AllLogsByProjectNameInput!,
+    options: QueryOptions
+  ): AllLogsByProjectNamePayload!
   # Get all Logs associated with a specific Project by the project's UUID
-  allLogsByProjectId(input: AllLogsByProjectIdInput!): AllLogsByProjectIdPayload!
+  allLogsByProjectId(
+    input: AllLogsByProjectIdInput!,
+    options: QueryOptions
+  ): AllLogsByProjectIdPayload!
 }
 
 type AllLogsPayload {

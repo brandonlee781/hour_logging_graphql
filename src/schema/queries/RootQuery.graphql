@@ -1,3 +1,8 @@
 type Query {
   getUser: User!
 }
+
+input QueryOptions {
+  limit: Int
+  offset: Int
+}

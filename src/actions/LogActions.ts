@@ -13,7 +13,10 @@ export class LogActions extends AbstractActions<Knex> {
       .from(Tables.Logs)
       .join('projects', { project_id: 'projects.id' })
       .limit(options.limit)
-      .offset(options.offset);
+      .offset(options.offset)
+      .orderBy('created_at', 'desc')
+      .orderBy('date', 'desc')
+      .orderBy('start_time', 'desc');
   }
 
   public async findById(id: string): Promise<models.log.RawAttributes> {
@@ -39,12 +42,21 @@ export class LogActions extends AbstractActions<Knex> {
       .whereIn('logs.id', ids);
   }
 
-  public async findByProjectId(id: string): Promise<models.log.RawAttributes[]> {
+  public async findByProjectId(
+    id: string, 
+    limit: number, 
+    offset: number
+  ): Promise<models.log.RawAttributes[]> {
     return this.db
       .select('logs.*', 'projects.id as project_id', 'projects.name as project_name')
       .from(Tables.Logs)
       .join('projects', { project_id: 'projects.id' })
-      .where('projects.id', id);
+      .where('projects.id', id)
+      .limit(limit)
+      .offset(offset)
+      .orderBy('created_at', 'desc')
+      .orderBy('date', 'desc')
+      .orderBy('start_time', 'desc');
   }
 
   public async search(text: string): Promise<models.log.RawAttributes[]> {

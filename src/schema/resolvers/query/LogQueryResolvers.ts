@@ -3,10 +3,10 @@ import { LogModel } from '../../../models/index';
 
 export const allLogs = async (
   root, 
-  data, 
+  { input, options: { limit, offset } }, 
   context: Context<common.PageinationArguments>
 ): Promise<{logs: LogModel[]}> => {
-  const logs = await context.Services.LogService.findAll({ limit: 100, offset: 0 });
+  const logs = await context.Services.LogService.findAll({ limit, offset });
   return { logs };
 };
 
@@ -21,20 +21,25 @@ export const oneLog = async (
 
 export const allLogsByProjectName = async (
   root, 
-  { input: { name } }, 
+  { input: { name }, options: { limit, offset }  }, 
   context: Context<common.PageinationArguments>
 ): Promise<{ logs: LogModel[] }> => {
   const project = await context.Services.ProjectService.search(name);
   const projectId = project[0].Id;
-  const logs = await context.Services.LogService.findByProjectId(projectId);
+  const logs = await context.Services.LogService.findByProjectId(projectId, { limit, offset });
   return { logs };
 };
 
 export const allLogsByProjectId = async (
   root, 
-  { input: { id } }, 
+  { input: { id }, options: { limit, offset }  }, 
   context: Context<common.PageinationArguments>
 ): Promise<{logs: LogModel[]}> => {
-  const logs = await context.Services.LogService.findByProjectId(id);
+  let logs;
+  if (id !== '') {
+    logs = await context.Services.LogService.findByProjectId(id, { limit, offset });
+  } else {
+    logs = await context.Services.LogService.findAll({ limit, offset });
+  }
   return { logs };
 };

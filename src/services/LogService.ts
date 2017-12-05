@@ -30,9 +30,12 @@ export class LogService {
     return results.map(result => new LogModel(result));
   }
 
-  public async findByProjectId(id: string): Promise<LogModel[]> {
+  public async findByProjectId(
+    id: string,
+    { limit = 100, offset = 0 }: common.PageinationArguments
+  ): Promise<LogModel[]> {
     this.log.debug('findByProjectId called with id=', id);
-    const results = await this.logActions.findByProjectId(id);
+    const results = await this.logActions.findByProjectId(id, limit, offset);
     return results.map(result => new LogModel(result));
   }
 
