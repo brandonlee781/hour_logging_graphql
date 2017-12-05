@@ -2,12 +2,18 @@ import * as faker from 'faker';
 import { DateTime } from 'luxon';
 import { InvoiceModel, LogModel } from '../../models';
 
-export const makeInvoice = (logs: LogModel[], num: number): InvoiceModel => {
-  const hours = logs.map(log => log.Duration);
+interface Invoice {
+  number: number;
+  date: string;
+  logs: LogModel[];
+  hours: number;
+}
+
+export const makeInvoice = (invoice: Invoice): InvoiceModel => {
   return (new InvoiceModel())
-    .setNumber(num)
-    .setDate(DateTime.fromJSDate(faker.date.recent()).toFormat('yyyy-MM-dd'))
-    .setLogs(logs.map(log => log.toJSON()))
-    .setHours(hours.reduce((a, b) => a + b))
+    .setNumber(invoice.number)
+    .setDate(invoice.date)
+    .setLogs(invoice.logs.map(log => log.toJSON()))
+    .setHours(invoice.hours)
     .setRate(25);
 };

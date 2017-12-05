@@ -17,14 +17,22 @@ const times = () => {
   };
 };
 
-export const makeLog = (projectId: string): LogModel => {
+interface NewLog {
+  date: string;
+  startTime: number;
+  endTime: number;
+  project: string;
+  note: string;
+}
+
+export const makeLog = (log: NewLog): LogModel => {
   const { startTime, endTime, duration } = times();
 
   return (new LogModel())
-    .setDate(DateTime.fromJSDate(faker.date.recent()).toFormat('yyyy-MM-dd'))
-    .setStartTime(startTime)
-    .setEndTime(endTime)
-    .setDuration(duration)
-    .setProjectId(projectId)
-    .setNote(faker.lorem.sentence());
+    .setDate(log.date)
+    .setStartTime(log.startTime < 10 ? `0${log.startTime}:00` : `${log.startTime}:00`)
+    .setEndTime(log.endTime < 10 ? `0${log.endTime}:00` : `${log.endTime}:00`)
+    .setDuration(log.endTime - log.startTime)
+    .setProjectId(log.project)
+    .setNote(log.note);
 };
