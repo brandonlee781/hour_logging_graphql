@@ -9,7 +9,7 @@ type Log {
   # Date of log entry
   date: String
   # Number of hours between startTime and endTime
-  duration: Int
+  duration: Float
   # Project log entry is associated with
   project: Project
   # Any notes associated with log entry

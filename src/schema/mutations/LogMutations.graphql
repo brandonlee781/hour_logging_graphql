@@ -5,15 +5,15 @@ extend type Mutation {
 }
 
 input NewLog {
-  startTime: String, 
-  endTime: String, 
-  date: String, 
-  duration: Int, 
-  projectId: String, 
-  note: String
+  startTime: String!, 
+  endTime: String!, 
+  date: String!, 
+  duration: Float!, 
+  projectId: String!, 
+  note: String!
 }
 input CreateLogInput {
-  log: NewLog
+  log: NewLog!
 }
 type CreateLogPayload {
   log: Log
