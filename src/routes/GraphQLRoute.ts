@@ -38,7 +38,7 @@ export class GraphQLRoute {
       }
     })));
     if (Environment.getName() !== 'production') {
-      app.use('/graphiql', graphiqlExpress({
+      app.use('/api/graphiql', graphiqlExpress({
         endpointURL: '/graphql',
         // tslint:disable-next-line
         passHeader: `'Authorization': 'bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImJyYW5kb25sZWU3ODFAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkcmYzMldyayJ9.o4D-YFd07Davg2jBQG1j80rYIzN0joCGfOpkNy79Vz0'`

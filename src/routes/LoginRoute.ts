@@ -13,7 +13,7 @@ const jwtSecret = process.env.JWT_SECRET;
 export class LoginRoute {
 
   static map(app: express.Application): void {
-    app.post('/login', async (req: Req, res: Res) => {
+    app.post('/api/login', async (req: Req, res: Res) => {
       const user = req.body;
       const dbPass = await DB.select().from('users').where('email', user.email);
       const comp = await compare(user.password, dbPass[0].password);
