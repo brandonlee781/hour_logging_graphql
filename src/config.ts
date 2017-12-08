@@ -68,7 +68,7 @@ export = <config.Environments> {
    */
   production: {
     database: {
-      connection: 'mysql://root:root@localhost:3306/hour_logger_prod',
+      connection: `mysql://root:${process.env.MYSQL_PASS}@localhost:3306/hour_logger_prod`,
       client: 'mysql',
       migrations: {
         directory: './src/database/migrations',
