@@ -12,7 +12,8 @@ export class ProjectActions extends AbstractActions<Knex> {
       .select()
       .from(Tables.Projects)
       .limit(options.limit)
-      .offset(options.offset);
+      .offset(options.offset)
+      .orderBy('name', 'ASC');
   }
 
   public async findById(id: string): Promise<models.project.RawAttributes> {

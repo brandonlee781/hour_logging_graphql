@@ -8,7 +8,7 @@ exports.up = function (db: Knex): Promise<any> {
       table.string('date').notNullable();
       table.time('start_time').notNullable();
       table.time('end_time').notNullable();
-      table.float('duration').notNullable();
+      table.float('duration', 8, 1).notNullable();
       table.string('project_id');
       table.string('note');
       table.timestamps(false, true);
