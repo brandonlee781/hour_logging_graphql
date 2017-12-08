@@ -13,7 +13,8 @@ export class InvoiceActions extends AbstractActions<Knex> {
       .from(Tables.Invoices)
       .limit(options.limit)
       .offset(options.offset)
-      .orderBy('created_at', 'desc');
+      .orderBy('number', 'desc')
+      .orderBy('date', 'desc');
   }
 
   public async findById(id: string): Promise<models.invoice.RawAttributes> {

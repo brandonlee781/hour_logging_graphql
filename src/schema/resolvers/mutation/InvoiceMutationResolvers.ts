@@ -18,10 +18,11 @@ export const createInvoice = async (
   { input: { invoice } }: CreateInvoiceInput,
   context: Context<common.PageinationArguments>
 ): Promise<{ invoice: InvoiceModel }> => {
+  const allInvoices = await context.Services.InvoiceService.findAll({ limit: 100, offset: 0 });
   const logs = await context.Services.LogService.findByIds(invoice.logs);
   const invoiceObject = {
     logs,
-    number: invoice.number,
+    number: allInvoices.length + 1,
     date: invoice.date,
     hours: invoice.hours,
     rate: invoice.rate,

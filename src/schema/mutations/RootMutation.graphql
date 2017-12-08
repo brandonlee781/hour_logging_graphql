@@ -15,7 +15,6 @@ type CreateProjectPayload {
 }
 
 input NewInvoice {
-  number: Int!
   date: String!
   hours: Int!
   rate: Int!
