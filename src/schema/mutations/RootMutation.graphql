@@ -16,7 +16,7 @@ type CreateProjectPayload {
 
 input NewInvoice {
   date: String!
-  hours: Int!
+  hours: Float!
   rate: Int!
   logs: [ID!]!
 }
