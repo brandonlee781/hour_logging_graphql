@@ -1,7 +1,10 @@
 module.exports = {
   apps: [{
     name: 'hour-logger-server',
-    script: 'dist/index.js'
+    script: 'dist/index.js',
+    env: {
+      'NODE_ENV': 'production'
+    }
   }],
   deploy: {
     production: {
