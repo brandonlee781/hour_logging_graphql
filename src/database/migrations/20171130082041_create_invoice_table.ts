@@ -7,7 +7,7 @@ exports.up = function (db: Knex): Promise<Knex.CreateTableBuilder[]> {
       table.integer('number').notNullable();
       table.string('date').notNullable();
       table.json('logs');
-      table.integer('hours');
+      table.decimal('hours', 8, 1);
       table.integer('rate');
       table.timestamps(false, true);
     })
