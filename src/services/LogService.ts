@@ -3,6 +3,11 @@ import { LogModel, Log } from '../models/LogModel';
 import { Logger } from '../core/Logger';
 import { NotFoundException } from '../exceptions';
 
+export interface DateFind {
+  start: string;
+  end: string;
+}
+
 export class LogService {
 
   private log = Logger('app:service:LogService');
@@ -36,6 +41,15 @@ export class LogService {
   ): Promise<LogModel[]> {
     this.log.debug('findByProjectId called with id=', id);
     const results = await this.logActions.findByProjectId(id, limit, offset);
+    return results.map(result => new LogModel(result));
+  }
+
+  public async findByDate(
+    { start, end }: DateFind,
+    { limit = 100, offset = 0 }: common.PageinationArguments
+  ): Promise<LogModel[]> {
+    this.log.debug('findByDate called with dates=', start, end);
+    const results = await this.logActions.findByDate(start, end, limit, offset);
     return results.map(result => new LogModel(result));
   }
 

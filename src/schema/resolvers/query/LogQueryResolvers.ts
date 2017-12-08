@@ -43,3 +43,12 @@ export const allLogsByProjectId = async (
   }
   return { logs };
 };
+
+export const allLogsByDates = async (
+  root,
+  { input: { start, end }, options: { limit, offset } },
+  context: Context<common.PageinationArguments>
+): Promise<{ logs: LogModel[] }> => {
+  const logs = await context.Services.LogService.findByDate({ start, end }, { limit, offset });
+  return { logs };
+};

@@ -13,6 +13,11 @@ extend type Query {
     input: AllLogsByProjectIdInput!,
     options: QueryOptions
   ): AllLogsByProjectIdPayload!
+  # Get all Logs Between two dates. If only one is specified get all logs before or after that date
+  allLogsByDates(
+    input: AllLogsByDateInput!,
+    options: QueryOptions
+  ): AllLogsByDatePayload
 }
 
 type AllLogsPayload {
@@ -37,5 +42,13 @@ input AllLogsByProjectIdInput {
   id: String!
 }
 type AllLogsByProjectIdPayload {
+  logs: [Log!]!
+}
+
+input AllLogsByDateInput {
+  start: String
+  end: String
+}
+type AllLogsByDatePayload {
   logs: [Log!]!
 }

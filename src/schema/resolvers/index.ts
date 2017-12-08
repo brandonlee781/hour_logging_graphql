@@ -6,6 +6,7 @@ import {
   oneProject,
   allLogsByProjectName,
   allLogsByProjectId,
+  allLogsByDates,
   allInvoices,
   oneInvoice,
 } from './query';
@@ -23,6 +24,7 @@ export const resolvers = {
     oneLog,
     allLogsByProjectName,
     allLogsByProjectId,
+    allLogsByDates,
 
     allProjects,
     oneProject,

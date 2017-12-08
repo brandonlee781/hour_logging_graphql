@@ -59,6 +59,24 @@ export class LogActions extends AbstractActions<Knex> {
       .orderBy('start_time', 'desc');
   }
 
+  public async findByDate(
+    start: string = '1970-01-01',
+    end: string = '2100-01-01',
+    limit: number,
+    offset: number
+  ): Promise<models.log.RawAttributes[]> {
+    return this.db
+      .select('logs.*', 'projects.id as project_id', 'projects.name as project_name')
+      .from(Tables.Logs)
+      .join('projects', { project_id: 'projects.id' })
+      .whereBetween('date', [start, end])
+      .limit(limit)
+      .offset(offset)
+      .orderBy('created_at', 'desc')
+      .orderBy('date', 'desc')
+      .orderBy('start_time', 'desc');
+  }
+
   public async search(text: string): Promise<models.log.RawAttributes[]> {
     return this.db
       .select('logs.*', 'projects.id as project_id', 'projects.name as project_name')
