@@ -25,7 +25,7 @@ exports.seed = async (db: Knex): Promise<void> => {
     i += 1;
   }
   // each invoice will be one weeks worth of logs
-  const invoices: Invoice[] = weeks.map((week, key) => {
+  const invoices: Invoice[] = weeks.reverse().map((week, key) => {
     const currLogs = logs.filter((log) => {
       const dt = DateTime.fromISO(log.Date);
       return dt < week && dt > week.minus({ days: 7 });
