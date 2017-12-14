@@ -9,6 +9,8 @@ import {
   allLogsByDates,
   allInvoices,
   oneInvoice,
+  allDontBeAs,
+  randomDontBeA
 } from './query';
 import { 
   createLog, 
@@ -31,6 +33,9 @@ export const resolvers = {
 
     allInvoices,
     oneInvoice,
+
+    allDontBeAs,
+    randomDontBeA,
   },
   Mutation: {
     createLog,

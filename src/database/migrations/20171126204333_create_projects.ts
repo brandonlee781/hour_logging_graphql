@@ -3,7 +3,7 @@ import * as Knex from 'knex';
 
 exports.up = function (db: Knex): Promise<any> {
   return Promise.all([
-    db.schema.createTable('projects', (table: Knex.CreateTableBuilder) => {
+    db.schema.createTableIfNotExists('projects', (table: Knex.CreateTableBuilder) => {
       table.string('id').notNullable().primary();
       table.string('name').notNullable();
       table.timestamps(false, true);

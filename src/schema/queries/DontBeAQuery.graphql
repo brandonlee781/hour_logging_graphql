@@ -1,0 +1,12 @@
+extend type Query {
+  allDontBeAs: AllDontBeAsPayLoad!
+  randomDontBeA: RandomDontBeAPayload!
+}
+
+type AllDontBeAsPayLoad {
+  dontBeAs: [DontBeA!]!
+}
+
+type RandomDontBeAPayload {
+  dontBeA: DontBeA!
+}

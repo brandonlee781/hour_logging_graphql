@@ -13,12 +13,14 @@ import {
 import {
   ProjectActions,
   LogActions,
-  InvoiceActions
+  InvoiceActions,
+  DontBeAActions
 } from '../actions';
 import {
   ProjectService,
   LogService,
-  InvoiceService
+  InvoiceService,
+  DontBeAService
 } from '../services';
 import { Authenticate } from '../middleware/Authenticate';
 import { addResolveFunctionsToSchema } from 'graphql-tools';
@@ -50,7 +52,8 @@ export class GraphQLRoute {
     ServicesContext.getInstance()
       .setProjectService(new ProjectService(new ProjectActions(DB)))
       .setLogService(new LogService(new LogActions(DB)))
-      .setInvoiceService(new InvoiceService(new InvoiceActions(DB)));
+      .setInvoiceService(new InvoiceService(new InvoiceActions(DB)))
+      .setDontBeAService(new DontBeAService(new DontBeAActions(DB)));
   }
 
 }

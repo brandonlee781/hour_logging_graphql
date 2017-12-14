@@ -2,7 +2,7 @@ import * as Knex from 'knex';
 
 exports.up = function (db: Knex): Promise<Knex.CreateTableBuilder[]> {
   return Promise.all([
-    db.schema.createTable('invoices', (table: Knex.CreateTableBuilder) => {
+    db.schema.createTableIfNotExists('invoices', (table: Knex.CreateTableBuilder) => {
       table.string('id').notNullable().primary();
       table.integer('number').notNullable();
       table.string('date').notNullable();
