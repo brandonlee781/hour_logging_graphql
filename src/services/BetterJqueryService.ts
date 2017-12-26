@@ -6,7 +6,7 @@ import { NotFoundException } from '../exceptions';
 require('dotenv').config();
 
 import axios from 'axios';
-import * as parser from 'xml2json';
+// import * as parser from 'xml2json';
 import * as fs from 'fs';
 
 const gitApi = axios.create({
