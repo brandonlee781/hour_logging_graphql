@@ -1,6 +1,7 @@
 type Project {
     id: String!
     name: String
+    color: String
     createdAt: String
     updatedAt: String
   }

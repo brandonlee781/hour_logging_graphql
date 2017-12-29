@@ -5,6 +5,7 @@ import { AbstractModel } from './AbstractModel';
 export class ProjectModel implements AbstractModel<models.project.Attributes, models.project.RawAttributes> {
   private id?: string;
   private name: string;
+  private color: string;
   private createdAt?: Date;
   private updatedAt?: Date;
 
@@ -24,6 +25,9 @@ export class ProjectModel implements AbstractModel<models.project.Attributes, mo
   public get Name(): string {
     return this.name;
   }
+  public get Color(): string {
+    return this.color;
+  }
   public get CreatedAt(): Date {
     return this.createdAt;
   }
@@ -39,6 +43,10 @@ export class ProjectModel implements AbstractModel<models.project.Attributes, mo
     this.name = name;
     return this;
   }
+  public setColor(color: string): ProjectModel {
+    this.color = color;
+    return this;
+  }
   public setCreatedAt(stamp: Date): ProjectModel {
     this.createdAt = stamp;
     return this;
@@ -52,6 +60,7 @@ export class ProjectModel implements AbstractModel<models.project.Attributes, mo
     if (attributes !== undefined) {
       this.setId(attributes.id);
       this.setName(attributes.name);
+      this.setColor(attributes.color);
       this.setCreatedAt(attributes.createdAt);
       this.setUpdatedAt(attributes.updatedAt);
     }
@@ -61,6 +70,7 @@ export class ProjectModel implements AbstractModel<models.project.Attributes, mo
     if (attributes !== undefined) {
       this.setId(attributes.id);
       this.setName(attributes.name);
+      this.setColor(attributes.color);
       this.setCreatedAt(attributes.created_at);
       this.setUpdatedAt(attributes.updated_at);
     }
@@ -93,12 +103,14 @@ export class ProjectModel implements AbstractModel<models.project.Attributes, mo
 export class Project implements models.project.Attributes {
   public id?: string;
   public name?: string;
+  public color?: string;
   public createdAt?: Date;
   public updatedAt?: Date;
 
   constructor(builder: ProjectModel) {
     this.id = builder.Id;
     this.name = builder.Name;
+    this.color = builder.Color;
     this.createdAt = builder.CreatedAt;
     this.updatedAt = builder.UpdatedAt;
   }
@@ -108,12 +120,14 @@ export class Project implements models.project.Attributes {
 export class RawProject implements models.project.RawAttributes {
   public id?: string;
   public name: string;
+  public color: string;
   public created_at?: Date;
   public updated_at?: Date;
 
   constructor(builder: ProjectModel) {
     this.id = builder.Id;
     this.name = builder.Name;
+    this.color = builder.Color;
     this.created_at = builder.CreatedAt;
     this.updated_at = builder.UpdatedAt;
   }

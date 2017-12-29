@@ -6,6 +6,7 @@ declare module 'models' {
       interface Attributes {
         id?: string;
         name?: string;
+        color?: string;
         createdAt?: Date;
         updatedAt?: Date;
       }
@@ -13,6 +14,7 @@ declare module 'models' {
       interface RawAttributes {
         id?: string;
         name?: string;
+        color?: string;
         created_at?: Date;
         updated_at?: Date;
       }
