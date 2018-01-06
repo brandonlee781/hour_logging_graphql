@@ -6,6 +6,7 @@ import { NotFoundException } from '../exceptions';
 export interface DateFind {
   start: string;
   end: string;
+  project?: string;
 }
 
 export class LogService {
@@ -14,7 +15,9 @@ export class LogService {
 
   constructor(private logActions: LogActions) {}
 
-  public async findAll(options: common.PageinationArguments): Promise<LogModel[]> {
+  public async findAll(
+    options: common.PageinationArguments = { limit: 100, offset: 0 }
+  ): Promise<LogModel[]> {
     this.log.debug('findAll called');
     const results = await this.logActions.findAll(options);
     return await results.map(result => new LogModel(result));
@@ -37,19 +40,24 @@ export class LogService {
 
   public async findByProjectId(
     id: string,
-    { limit = 100, offset = 0 }: common.PageinationArguments
+    options: common.PageinationArguments = { limit: 100, offset: 0 }
   ): Promise<LogModel[]> {
     this.log.debug('findByProjectId called with id=', id);
-    const results = await this.logActions.findByProjectId(id, limit, offset);
+    const results = await this.logActions.findByProjectId(id, options.limit, options.offset);
     return results.map(result => new LogModel(result));
   }
 
   public async findByDate(
-    { start, end }: DateFind,
-    { limit = 100, offset = 0 }: common.PageinationArguments
+    input: DateFind = { start: '1907-01-01', end: '2100-01-01' },
+    options: common.PageinationArguments = { limit: 100, offset: 0 },
+    project?: string,
   ): Promise<LogModel[]> {
-    this.log.debug('findByDate called with dates=', start, end);
-    const results = await this.logActions.findByDate(start, end, limit, offset);
+    this.log.debug('findByDate called with dates=', input.start, input.end);
+    const results = await this.logActions.findByDate(
+      input.start, input.end, 
+      options.limit, options.offset,
+      input.project
+    );
     return results.map(result => new LogModel(result));
   }
 

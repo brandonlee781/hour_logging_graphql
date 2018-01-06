@@ -1,8 +1,8 @@
 declare module common {
 
   interface PageinationArguments {
-    limit: number;
-    offset: number;
+    limit?: number;
+    offset?: number;
   }
 
 }

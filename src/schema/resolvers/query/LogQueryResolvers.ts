@@ -46,9 +46,12 @@ export const allLogsByProjectId = async (
 
 export const allLogsByDates = async (
   root,
-  { input: { start, end }, options: { limit, offset } },
+  { input, options },
   context: Context<common.PageinationArguments>
-): Promise<{ logs: LogModel[] }> => {
-  const logs = await context.Services.LogService.findByDate({ start, end }, { limit, offset });
+): Promise<{ logs: LogModel[] } | { error: string }> => {
+  if (!input.start && !input.end) {
+    throw new Error('No dates provided. Please consider using allLogs query instead.');
+  }
+  const logs = await context.Services.LogService.findByDate(input, options);
   return { logs };
 };

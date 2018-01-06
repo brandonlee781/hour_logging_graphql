@@ -63,13 +63,19 @@ export class LogActions extends AbstractActions<Knex> {
     start: string = '1970-01-01',
     end: string = '2100-01-01',
     limit: number,
-    offset: number
+    offset: number,
+    project?: string,
   ): Promise<models.log.RawAttributes[]> {
     return this.db
       .select('logs.*', 'projects.id as project_id', 'projects.name as project_name')
       .from(Tables.Logs)
       .join('projects', { project_id: 'projects.id' })
       .whereBetween('date', [start, end])
+      .where(function () {
+        if (project) {
+          this.where('projects.name', project).orWhere('projects.id', project);
+        }
+      })
       .limit(limit)
       .offset(offset)
       .orderBy('created_at', 'desc')

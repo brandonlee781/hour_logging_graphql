@@ -45,9 +45,16 @@ type AllLogsByProjectIdPayload {
   logs: [Log!]!
 }
 
+# Input for allLogsByDate query, all variables are optional but
+# either start or end must be provided, if one is not provided
+# the server will use a default value
 input AllLogsByDateInput {
+  # Beginning date to filter logs, default = 1970-01-01
   start: String
-  end: String
+  # End date to filter logs, default = 2100-01-01
+  end: String,
+  # Optional filter by project name or project id
+  project: String
 }
 type AllLogsByDatePayload {
   logs: [Log!]!
