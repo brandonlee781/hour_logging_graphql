@@ -1,3 +1,4 @@
+// tslint:disable
 require('dotenv').config();
 export = <config.Environments> {
   /**

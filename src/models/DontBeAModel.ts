@@ -2,6 +2,41 @@ import * as uuid from 'uuid/v4';
 import { models } from 'models';
 import { AbstractModel } from './AbstractModel';
 
+export class DontBeA implements models.dontBeA.Attributes {
+  public id?: string;
+  public phrase?: string;
+  public episodeNo?: string;
+  public episodeTitle?: string;
+  public updatedAt?: Date;
+
+  constructor(builder: DontBeAModel) {
+    this.id = builder.Id;
+    this.phrase = builder.Phrase;
+    this.episodeNo = builder.EpisodeNo;
+    this.episodeTitle = builder.EpisodeTitle;
+    this.updatedAt = builder.UpdatedAt;
+  }
+}
+
+// tslint:disable:variable-name
+export class RawDontBeA implements models.dontBeA.RawAttributes {
+  public id?: string;
+  public phrase?: string;
+  public episode_no?: string;
+  public episode_title?: string;
+  public created_at?: Date;
+  public updated_at?: Date;
+
+  constructor(builder: DontBeAModel) {
+    this.id = builder.Id;
+    this.phrase = builder.Phrase;
+    this.episode_no = builder.EpisodeNo;
+    this.episode_title = builder.EpisodeTitle;
+    this.created_at = builder.CreatedAt;
+    this.updated_at = builder.UpdatedAt;
+  }
+}
+
 export class DontBeAModel implements AbstractModel<models.dontBeA.Attributes, models.dontBeA.RawAttributes> {
   private id?: string;
   private phrase?: string;
@@ -113,40 +148,5 @@ export class DontBeAModel implements AbstractModel<models.dontBeA.Attributes, mo
     this.setEpisodeNo(model.episodeNo || this.EpisodeNo);
     this.setEpisodeTitle(model.episodeTitle || this.EpisodeTitle);
     return this;
-  }
-}
-
-export class DontBeA implements models.dontBeA.Attributes {
-  public id?: string;
-  public phrase?: string;
-  public episodeNo?: string;
-  public episodeTitle?: string;
-  public updatedAt?: Date;
-
-  constructor(builder: DontBeAModel) {
-    this.id = builder.Id;
-    this.phrase = builder.Phrase;
-    this.episodeNo = builder.EpisodeNo;
-    this.episodeTitle = builder.EpisodeTitle;
-    this.updatedAt = builder.UpdatedAt;
-  }
-}
-
-// tslint:disable:variable-name
-export class RawDontBeA implements models.dontBeA.RawAttributes {
-  public id?: string;
-  public phrase?: string;
-  public episode_no?: string;
-  public episode_title?: string;
-  public created_at?: Date;
-  public updated_at?: Date;
-
-  constructor(builder: DontBeAModel) {
-    this.id = builder.Id;
-    this.phrase = builder.Phrase;
-    this.episode_no = builder.EpisodeNo;
-    this.episode_title = builder.EpisodeTitle;
-    this.created_at = builder.CreatedAt;
-    this.updated_at = builder.UpdatedAt;
   }
 }

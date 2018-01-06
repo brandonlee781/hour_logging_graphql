@@ -3,6 +3,51 @@ import { models } from 'models';
 import { LogModel } from './LogModel';
 import { AbstractModel } from './AbstractModel';
 
+export class Invoice implements models.invoice.Attributes {
+  public id?: string;
+  public number?: number;
+  public date?: string;
+  public logs?: models.log.Attributes[];
+  public hours?: number;
+  public rate?: number;
+  public createdAt?: Date;
+  public updatedAt?: Date;
+
+  constructor(builder: InvoiceModel) {
+    this.id = builder.Id;
+    this.number = builder.Number;
+    this.date = builder.Date;
+    this.logs = typeof builder.Logs === 'object' ? builder.Logs : JSON.parse(builder.Logs);
+    this.hours = builder.Hours;
+    this.rate = builder.Rate;
+    this.createdAt = builder.CreatedAt;
+    this.updatedAt = builder.UpdatedAt;
+  }
+}
+
+// tslint:disable:variable-name
+export class RawInvoice implements models.invoice.RawAttributes {
+  public id?: string;
+  public number?: number;
+  public date?: string;
+  public logs?: string;
+  public hours?: number;
+  public rate?: number;
+  public created_at?: Date;
+  public updated_at?: Date;
+
+  constructor(builder: InvoiceModel) {
+    this.id = builder.Id;
+    this.number = builder.Number;
+    this.date = builder.Date;
+    this.logs = JSON.stringify(builder.Logs);
+    this.hours = builder.Hours;
+    this.rate = builder.Rate;
+    this.created_at = builder.CreatedAt;
+    this.updated_at = builder.UpdatedAt;
+  }
+}
+
 export class InvoiceModel implements AbstractModel<models.invoice.Attributes, models.invoice.RawAttributes> {
   private id?: string;
   private number: number;
@@ -141,50 +186,5 @@ export class InvoiceModel implements AbstractModel<models.invoice.Attributes, mo
     }
     this.setLogs(logs);
     return this;
-  }
-}
-
-export class Invoice implements models.invoice.Attributes {
-  public id?: string;
-  public number?: number;
-  public date?: string;
-  public logs?: models.log.Attributes[];
-  public hours?: number;
-  public rate?: number;
-  public createdAt?: Date;
-  public updatedAt?: Date;
-
-  constructor(builder: InvoiceModel) {
-    this.id = builder.Id;
-    this.number = builder.Number;
-    this.date = builder.Date;
-    this.logs = typeof builder.Logs === 'object' ? builder.Logs : JSON.parse(builder.Logs);
-    this.hours = builder.Hours;
-    this.rate = builder.Rate;
-    this.createdAt = builder.CreatedAt;
-    this.updatedAt = builder.UpdatedAt;
-  }
-}
-
-// tslint:disable:variable-name
-export class RawInvoice implements models.invoice.RawAttributes {
-  public id?: string;
-  public number?: number;
-  public date?: string;
-  public logs?: string;
-  public hours?: number;
-  public rate?: number;
-  public created_at?: Date;
-  public updated_at?: Date;
-
-  constructor(builder: InvoiceModel) {
-    this.id = builder.Id;
-    this.number = builder.Number;
-    this.date = builder.Date;
-    this.logs = JSON.stringify(builder.Logs);
-    this.hours = builder.Hours;
-    this.rate = builder.Rate;
-    this.created_at = builder.CreatedAt;
-    this.updated_at = builder.UpdatedAt;
   }
 }

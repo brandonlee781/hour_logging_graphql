@@ -2,6 +2,55 @@ import * as uuid from 'uuid/v4';
 import { models } from 'models';
 import { AbstractModel } from './AbstractModel';
 
+export class Log implements models.log.Attributes {
+  public id?: string;
+  public date: string;
+  public startTime: string;
+  public endTime: string;
+  public duration: number;
+  public projectId: string;
+  public note: string;
+  public createdAt?: Date;
+  public updatedAt?: Date;
+
+  constructor(builder: LogModel) {
+    this.id = builder.Id;
+    this.date = builder.Date;
+    this.startTime = builder.StartTime;
+    this.endTime = builder.EndTime;
+    this.duration = builder.Duration;
+    this.projectId = builder.ProjectId;
+    this.note = builder.Note;
+    this.createdAt = builder.CreatedAt;
+    this.updatedAt = builder.UpdatedAt;
+  }
+}
+
+// tslint:disable:variable-name
+export class RawLog implements models.log.RawAttributes {
+  public id?: string;
+  public date: string;
+  public start_time: string;
+  public end_time: string;
+  public duration: number;
+  public project_id: string;
+  public note: string;
+  public created_at?: Date;
+  public updated_at?: Date;
+
+  constructor(builder: LogModel) {
+    this.id = builder.Id;
+    this.date = builder.Date;
+    this.start_time = builder.StartTime;
+    this.end_time = builder.EndTime;
+    this.duration = builder.Duration;
+    this.project_id = builder.ProjectId;
+    this.note = builder.Note;
+    this.created_at = builder.CreatedAt;
+    this.updated_at = builder.UpdatedAt;
+  }
+}
+
 export class LogModel implements AbstractModel<models.log.Attributes, models.log.RawAttributes> {
   private id?: string;
   private date: string;
@@ -150,54 +199,5 @@ export class LogModel implements AbstractModel<models.log.Attributes, models.log
     this.setCreatedAt(model.createdAt || this.CreatedAt);
     this.setUpdatedAt(model.updatedAt || this.UpdatedAt);
     return this;
-  }
-}
-
-export class Log implements models.log.Attributes {
-  public id?: string;
-  public date: string;
-  public startTime: string;
-  public endTime: string;
-  public duration: number;
-  public projectId: string;
-  public note: string;
-  public createdAt?: Date;
-  public updatedAt?: Date;
-
-  constructor(builder: LogModel) {
-    this.id = builder.Id;
-    this.date = builder.Date;
-    this.startTime = builder.StartTime;
-    this.endTime = builder.EndTime;
-    this.duration = builder.Duration;
-    this.projectId = builder.ProjectId;
-    this.note = builder.Note;
-    this.createdAt = builder.CreatedAt;
-    this.updatedAt = builder.UpdatedAt;
-  }
-}
-
-// tslint:disable:variable-name
-export class RawLog implements models.log.RawAttributes {
-  public id?: string;
-  public date: string;
-  public start_time: string;
-  public end_time: string;
-  public duration: number;
-  public project_id: string;
-  public note: string;
-  public created_at?: Date;
-  public updated_at?: Date;
-
-  constructor(builder: LogModel) {
-    this.id = builder.Id;
-    this.date = builder.Date;
-    this.start_time = builder.StartTime;
-    this.end_time = builder.EndTime;
-    this.duration = builder.Duration;
-    this.project_id = builder.ProjectId;
-    this.note = builder.Note;
-    this.created_at = builder.CreatedAt;
-    this.updated_at = builder.UpdatedAt;
   }
 }

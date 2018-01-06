@@ -2,6 +2,39 @@ import * as uuid from 'uuid/v4';
 import { models } from 'models';
 import { AbstractModel } from './AbstractModel';
 
+export class Project implements models.project.Attributes {
+  public id?: string;
+  public name?: string;
+  public color?: string;
+  public createdAt?: Date;
+  public updatedAt?: Date;
+
+  constructor(builder: ProjectModel) {
+    this.id = builder.Id;
+    this.name = builder.Name;
+    this.color = builder.Color;
+    this.createdAt = builder.CreatedAt;
+    this.updatedAt = builder.UpdatedAt;
+  }
+}
+
+// tslint:disable:variable-name
+export class RawProject implements models.project.RawAttributes {
+  public id?: string;
+  public name: string;
+  public color: string;
+  public created_at?: Date;
+  public updated_at?: Date;
+
+  constructor(builder: ProjectModel) {
+    this.id = builder.Id;
+    this.name = builder.Name;
+    this.color = builder.Color;
+    this.created_at = builder.CreatedAt;
+    this.updated_at = builder.UpdatedAt;
+  }
+}
+
 export class ProjectModel implements AbstractModel<models.project.Attributes, models.project.RawAttributes> {
   private id?: string;
   private name: string;
@@ -97,38 +130,5 @@ export class ProjectModel implements AbstractModel<models.project.Attributes, mo
   public merge(model: ProjectModel): ProjectModel {
     this.setName(model.Name || this.Name);
     return this;
-  }
-}
-
-export class Project implements models.project.Attributes {
-  public id?: string;
-  public name?: string;
-  public color?: string;
-  public createdAt?: Date;
-  public updatedAt?: Date;
-
-  constructor(builder: ProjectModel) {
-    this.id = builder.Id;
-    this.name = builder.Name;
-    this.color = builder.Color;
-    this.createdAt = builder.CreatedAt;
-    this.updatedAt = builder.UpdatedAt;
-  }
-}
-
-// tslint:disable:variable-name
-export class RawProject implements models.project.RawAttributes {
-  public id?: string;
-  public name: string;
-  public color: string;
-  public created_at?: Date;
-  public updated_at?: Date;
-
-  constructor(builder: ProjectModel) {
-    this.id = builder.Id;
-    this.name = builder.Name;
-    this.color = builder.Color;
-    this.created_at = builder.CreatedAt;
-    this.updated_at = builder.UpdatedAt;
   }
 }
