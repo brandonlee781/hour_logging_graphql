@@ -82,6 +82,7 @@
     "jsonwebtoken": "^8.1.0",
     "knex": "^0.14.2",
     "luxon": "^0.2.2",
+    "moment": "^2.22.0",
     "mongodb": "^2.2.33",
     "morgan": "^1.9.0",
     "mysql": "^2.15.0",
